@@ -24,13 +24,11 @@ func main() {
 	var list [][]int
 	list = makeList(data)
 	fmt.Printf("1a: %v\n", part1(list))
-	list = makeList(data)
 	fmt.Printf("1b: %v\n", part2(list))
-	list = makeList(data)
 	fmt.Printf("1b: %v\n", part2a(list))
 }
 
-func makeList([]byte) [][]int {
+func makeList(data []byte) [][]int {
 	listLength := bytes.Count(data, []byte{'\n'})
 	list := make([][]int, 2)
 	for i := range list {
