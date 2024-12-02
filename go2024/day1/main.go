@@ -56,11 +56,12 @@ func makeList([]byte) [][]int {
 }
 
 func part1(list [][]int) int {
+	defer utils.Timer()()
+	var answer int
 	for _, v := range list {
 		slices.Sort(v)
 	}
 
-	var answer int
 	for i := 0; i < len(list[0]); i++ {
 		x := int(math.Abs(float64(list[0][i] - list[1][i])))
 		answer += x
@@ -71,6 +72,7 @@ func part1(list [][]int) int {
 }
 
 func part2(list [][]int) int {
+	defer utils.Timer()()
 	var answer int
 	for _, v := range list[0] {
 		count := 0
