@@ -26,6 +26,8 @@ func main() {
 	fmt.Printf("1a: %v\n", part1(list))
 	list = makeList(data)
 	fmt.Printf("1b: %v\n", part2(list))
+	list = makeList(data)
+	fmt.Printf("1b: %v\n", part2a(list))
 }
 
 func makeList([]byte) [][]int {
@@ -83,6 +85,37 @@ func part2(list [][]int) int {
 		}
 		answer += v * count
 		// fmt.Printf("%v appears %v times\n", v, count)
+	}
+
+	return answer
+}
+
+func part2a(list [][]int) int {
+	defer utils.Timer()()
+	var answer int
+
+	for _, v := range list {
+		slices.Sort(v)
+	}
+	counts := make(map[int]int)
+
+	i := 0
+	for _, v := range list[0] {
+		if counts[v] != 0 {
+			continue
+		}
+		c := 0
+		for i < len(list[1]) && list[1][i] <= v {
+			if list[1][i] == v {
+				c++
+			}
+			i++
+		}
+		counts[v] = c
+	}
+
+	for k, v := range counts {
+		answer += k * v
 	}
 
 	return answer
