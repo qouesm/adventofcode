@@ -16,10 +16,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-
-	if _, err := utils.ReadInput(); if err != nil {
-		panic(err)
-	}
 }
 
 func main() {
