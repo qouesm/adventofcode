@@ -21,9 +21,11 @@ func main() {
 }
 
 func part1() int {
+	defer utils.Timer()()
 	return 0
 }
 
 func part2() int {
+	defer utils.Timer()()
 	return 0
 }
