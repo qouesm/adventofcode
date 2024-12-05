@@ -1,0 +1,19 @@
+ggV:norm I <ent>
+ggV:norm A <ent>
+/\d
+gg
+
+qa
+	0nyl0P
+	$Nyl0p
+	lDj0
+q999@a
+
+gg0
+
+qb
+	"vyydd
+	"wyydd
+	:let sum=str2nr(@v)+str2nr(@w)<ent>
+	:put! =sum<ent>
+q999@b
