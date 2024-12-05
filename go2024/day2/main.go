@@ -56,9 +56,9 @@ func part1(list [][]int) int {
 				continue
 			}
 			if j == 1 {
-				if level < prevLevel {
+				if level < prevLevel && prevLevel-level <= 3 {
 					reportType = 1
-				} else if level > prevLevel {
+				} else if level > prevLevel && level-prevLevel <= 3 {
 					reportType = 2
 				} else {
 					isSafeReport = false
@@ -93,5 +93,70 @@ func part1(list [][]int) int {
 
 func part2(list [][]int) int {
 	defer utils.Timer()()
-	return 0
+
+	var answer int
+	for _, report := range list {
+		if isValidReport(report) {
+			answer++
+			continue
+		}
+
+		alreadyValid := false
+		for i := range report {
+			if alreadyValid {
+				continue
+			}
+			r := make([]int, 0, len(report)-1)
+			for j, v := range report {
+				if j != i {
+					r = append(r, v)
+				}
+			}
+			if isValidReport(r) {
+				answer++
+				alreadyValid = true
+				continue
+			}
+		}
+	}
+	return answer
+}
+
+func isValidReport(report []int) bool {
+	prevLevel := report[0]
+	var reportType int // 0: ?, 1: inc, 2: dec
+	for i, level := range report {
+		if i == 0 {
+			continue
+		} else if i == 1 {
+			if level < prevLevel && prevLevel-level <= 3 {
+				reportType = 1
+				prevLevel = level
+			} else if level > prevLevel && level-prevLevel <= 3 {
+				reportType = 2
+				prevLevel = level
+			} else {
+				return false
+			}
+		} else {
+			switch reportType {
+			case 1:
+				if level < prevLevel && prevLevel-level <= 3 {
+					prevLevel = level
+				} else {
+					return false
+				}
+			case 2:
+				if level > prevLevel && level-prevLevel <= 3 {
+					prevLevel = level
+				} else {
+					return false
+				}
+			default:
+				fmt.Println("uh oh")
+				return false
+			}
+		}
+	}
+	return true
 }
